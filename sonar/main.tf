@@ -60,12 +60,43 @@ resource "aws_instance" "sonar-server" {
 #!/bin/bash
 
 # Update package index
-sudo apt-get update
+sudo apt update && apt upgrade -y
+
+
+# Install Java 11
+sudo apt update
+sudo apt install -y openjdk-11-jdk
+
+# Set the JAVA_HOME environment variable
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/
+
+# Download and install SonarQube Server
+wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-8.9.2.46101.zip
+unzip sonarqube-8.9.2.46101.zip -d /opt/sonarqube/
+/opt/sonarqube/bin/sonar.sh start
+
+echo "SonarQube Server installation complete."
+
 
 EOF
 
   tags = {
-    "Name" = "Sonar-Server"
+    "Name" = "Sonar-Server"#!/bin/bash
+
+# Install Java 11
+sudo apt update
+sudo apt install -y openjdk-11-jdk
+
+# Set the JAVA_HOME environment variable
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/
+
+# Download and install SonarQube Server
+wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-8.9.2.46101.zip
+unzip sonarqube-8.9.2.46101.zip -d /opt/sonarqube/
+/opt/sonarqube/bin/sonar.sh start
+
+echo "SonarQube Server installation complete."
+
   }
 }
 
